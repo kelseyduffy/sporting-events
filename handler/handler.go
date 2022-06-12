@@ -15,7 +15,7 @@ func NewHandler(db db.Database) http.Handler {
 	dbInstance = db
 	router.MethodNotAllowed(methodNotAllowedHandler)
 	router.NotFound(notFoundHandler)
-	router.Route("/items", items)
+	router.Route("/teams", teams)
 	return router
 }
 func methodNotAllowedHandler(w http.ResponseWriter, r *http.Request) {

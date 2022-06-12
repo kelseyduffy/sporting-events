@@ -16,7 +16,7 @@ then connect to the postgres container at `127.0.0.1:5432` either with:
     - `\connect <database name>`
 - pgadmin
 
-then manually execute the sql files in the [sql folder](db/sql) to create the items table
+then manually execute the sql files in the [sql folder](db/sql) to create the teams table
 
 set the environment variables on machine running Go needed for Go to connect to the postgres instance
 - `export POSTGRES_USER=<postgres user>`

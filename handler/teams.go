@@ -16,9 +16,9 @@ import (
 var teamIDKey = "teamID"
 
 func teams(router chi.Router) {
-	router.Get("/teams", getAllTeams)
-	router.Post("/teams", createTeam)
-	router.Route("/teams/{teamID}", func(router chi.Router) {
+	router.Get("/", getAllTeams)
+	router.Post("/", createTeam)
+	router.Route("/{teamID}", func(router chi.Router) {
 		router.Use(TeamContext)
 		router.Get("/", getTeam)
 		router.Put("/", updateTeam)
