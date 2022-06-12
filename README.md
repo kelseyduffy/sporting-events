@@ -23,4 +23,12 @@ set the environment variables on machine running Go needed for Go to connect to 
 - `export POSTGRES_PASSWORD=<postgres password>`
 - `export POSTGRES_DB=<postgres database>`
 
-then run `go run main.go` and access the rest api at `127.0.0.1:8080`
+# Setting up REST API
+
+run `go run main.go` and access the rest api at `localhost:8080`
+
+## inserting records
+
+once up and running, use curl to interact with the REST API and postgres db
+`curl -X POST http://localhost:8080/teams -H "Content-type: application/json" -d '{ "name": "Houston Dynamo", "founded_year": "2005", "dissolved_year": null, "sport": "soccer"}'`
+`curl http://127.0.0.1:8080/teams`
