@@ -8,7 +8,7 @@ import (
 
 func (db Database) GetAllTeams() (*models.TeamList, error) {
 	list := &models.TeamList{}
-	rows, err := db.Conn.Query("SELECT * FROM Teams ORDER BY ID DESC")
+	rows, err := db.Conn.Query("SELECT * FROM teams ORDER BY id DESC")
 	if err != nil {
 		return list, err
 	}
@@ -24,7 +24,7 @@ func (db Database) GetAllTeams() (*models.TeamList, error) {
 }
 func (db Database) AddTeam(team *models.Team) error {
 	var id int
-	query := `INSERT INTO Teams (Name, FoundedYear, DissolvedYear, Sport) VALUES ($1, $2, $3, $4) RETURNING id`
+	query := `INSERT INTO teams (name, founded_year, dissolved_year, sport) VALUES ($1, $2, $3, $4) RETURNING id`
 	err := db.Conn.QueryRow(query, team.Name, team.FoundedYear, team.DissolvedYear, team.Sport).Scan(&id)
 	if err != nil {
 		return err
@@ -34,7 +34,7 @@ func (db Database) AddTeam(team *models.Team) error {
 }
 func (db Database) GetTeamById(teamId int) (models.Team, error) {
 	team := models.Team{}
-	query := `SELECT * FROM Teams WHERE ID = $1;`
+	query := `SELECT * FROM teams WHERE id = $1;`
 	row := db.Conn.QueryRow(query, teamId)
 	switch err := row.Scan(&team.ID, &team.Name, &team.FoundedYear, &team.DissolvedYear, &team.Sport); err {
 	case sql.ErrNoRows:
@@ -44,7 +44,7 @@ func (db Database) GetTeamById(teamId int) (models.Team, error) {
 	}
 }
 func (db Database) DeleteTeam(teamId int) error {
-	query := `DELETE FROM Teams WHERE ID = $1;`
+	query := `DELETE FROM teams WHERE id = $1;`
 	_, err := db.Conn.Exec(query, teamId)
 	switch err {
 	case sql.ErrNoRows:
@@ -55,7 +55,7 @@ func (db Database) DeleteTeam(teamId int) error {
 }
 func (db Database) UpdateTeam(teamId int, teamData models.Team) (models.Team, error) {
 	team := models.Team{}
-	query := `UPDATE Teams SET Name=$1, FoundedYear=$2, DissolvedYear=$3, Sport=$4 WHERE ID=$5 RETURNING ID, Name, FoundedYear, DissolvedYear, Sport;`
+	query := `UPDATE teams SET name=$1, founded_year=$2, dissolved_year=$3, sport=$4 WHERE id=$5 RETURNING id, name, founded_year, dissolved_year, sport;`
 	err := db.Conn.QueryRow(query, teamData.Name, teamData.FoundedYear, teamData.DissolvedYear, teamData.Sport, teamId).Scan(&team.ID, &team.Name,
 		&team.FoundedYear, &team.DissolvedYear, &team.Sport)
 	if err != nil {

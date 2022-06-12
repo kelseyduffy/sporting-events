@@ -1,15 +1,10 @@
 
 -- create the table for teams and the corresponding table for their name history
 
-CREATE TABLE public."Teams"
-(
-    "ID" serial NOT NULL,
-    "Name" text NOT NULL,
-    "FoundedDate" text NOT NULL,
-    "DissolvedDate" text,
-    "Sport" text NOT NULL,
-    PRIMARY KEY ("ID")
+CREATE TABLE IF NOT EXISTS teams(
+id SERIAL PRIMARY KEY,
+name TEXT NOT NULL,
+founded_year TEXT NOT NULL,
+dissolved_year TEXT,
+sport TEXT NOT NULL
 );
-
-ALTER TABLE IF EXISTS public."Teams"
-    OWNER to postgres;
