@@ -1,16 +1,17 @@
 package models
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 )
 
 type Team struct {
-	ID            int    `json:"id"`
-	Name          string `json:"name"`
-	FoundedYear   string `json:"founded_year"`
-	DissolvedYear string `json:"dissolved_year"`
-	Sport         string `json:"sport"`
+	ID            int            `json:"id"`
+	Name          string         `json:"name"`
+	FoundedYear   string         `json:"founded_year"`
+	DissolvedYear sql.NullString `json:"dissolved_year"`
+	Sport         string         `json:"sport"`
 }
 type TeamList struct {
 	Teams []Team `json:"teams"`

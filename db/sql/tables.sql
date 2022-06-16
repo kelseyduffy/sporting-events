@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS teams(
 id SERIAL PRIMARY KEY,
 name TEXT NOT NULL,
-founded_year TEXT NOT NULL,
-dissolved_year TEXT,
+founded_year Date NOT NULL,
+dissolved_year Date,
 sport TEXT NOT NULL
 );
